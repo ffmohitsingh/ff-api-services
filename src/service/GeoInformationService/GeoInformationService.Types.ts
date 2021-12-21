@@ -26,12 +26,13 @@ export namespace GeoInformationsServiceTypes {
         isGlobal: boolean;
 
         // for global polygons is always true
-        // for local polygons (isGlobal===false) hasGlobal says if we have global (isGlobal===true) polygon with same name
+        // for local polygons (isGlobal===false) hasGlobal says if we have global (isGlobal===true) polygon with same name,
+        // so we can revert local to global one
         hasGlobal:boolean;
 
         metadata: object;
         name: string;
-        parent: string;
+        parent?: string;
     }
 
     export interface GeoInformationMetadataOnly extends Omit<GeoInformationValue, "geometry">{
@@ -55,10 +56,12 @@ export namespace GeoInformationsServiceTypes {
     }
     export type Geometry = PolygonGeometry | MultiPolygonGeometry;
 
-    export interface ListOfPolygons {
+    export interface ListResponse<T> {
         size: number;
-        values: GeoInformationValue[];
+        values: T[];
     }
+
+    export type ListOfPolygons = ListResponse<GeoInformationValue>;
 
     export interface LinkedPolygon {
         polygonName: string;

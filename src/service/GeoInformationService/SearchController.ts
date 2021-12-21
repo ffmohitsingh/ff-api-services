@@ -18,13 +18,16 @@ export class SearchController extends APIClient {
         return this.invokeApiWithErrorHandling<FindPolygonResponse>(`/polygons/search?q=${query}&country=${countryCode}`, 'GET');
     }
 
+    async findPolygons(names: string[]) {
+        return this.invokeApiWithErrorHandling<FindPolygonResponse>(`/polygons/search/list?names=${names}`, 'GET');
+    }
+
     /**
-     * fetch polygons list by captions
-     * @param captions
-     * @param onlyMetadata
+     * fetch polygons by names
+     * @param names
      */
-    async fetchPolygonDetails(captions: string, onlyMetadata: boolean = false) {
-        return this.invokeApiWithErrorHandling<GeoInformationValue[]>(`/polygons/list?names=${captions}&onlyMetadata=${onlyMetadata}`, 'GET');
+    async fetchPolygonDetails(names: string[]) {
+        return this.invokeApiWithErrorHandling<GeoInformationValue[]>(`/polygons/list?names=${names}&onlyMetadata=false`, 'GET');
     }
     /**
      * fetch polygons metadata by names
