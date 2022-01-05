@@ -224,7 +224,7 @@ export class SchemaServiceV2 extends APIClient {
      * Throws http status code: CONFLICT(409) if an extension with the same name already exists
      */
     createExtension = async (extension: Extension) => {
-        return this.invokeApiWithErrorHandling(`/extensions`, 'POST', extension, v2Header);
+        return this.invokeApiWithErrorHandling<Extension>(`/extensions`, 'POST', extension, v2Header);
     };
 
 
