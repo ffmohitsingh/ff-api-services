@@ -219,6 +219,16 @@ export class SchemaServiceV2 extends APIClient {
     };
 
     /**
+     * Create extension.
+     * @param extension - The extension object, that should be created or updated.
+     * Throws http status code: CONFLICT(409) if an extension with the same name already exists
+     */
+    createExtension = async (extension: Extension) => {
+        return this.invokeApiWithErrorHandling(`/extensions`, 'POST', extension, v2Header);
+    };
+
+
+    /**
      * Deletes extension by name.
      * @param name - The extension's name.
      */
